@@ -1,6 +1,20 @@
 <template>
   <div class="object-falling-area">
     <TheObject v-for="object in fallingObject" :key="object.id" :objectInfo="object" :id="`the-object-fall-${object.id}`" />
+    <v-container class="mobile-controller pr-4 pl-0" v-if="this.$vuetify.breakpoint.width < 600">
+      <div class="d-flex flex-row " >
+        <v-col>
+          <v-btn color="primary" x-large outlined block @click="moveFalling({keyCode: 37})">
+            <v-icon x-large>mdi-arrow-left</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn color="primary" x-large outlined block @click="moveFalling({keyCode: 39})">
+            <v-icon x-large>mdi-arrow-right</v-icon>
+          </v-btn>
+        </v-col>
+      </div>
+    </v-container>
   </div>
 </template>
 
@@ -44,7 +58,7 @@ export default {
         if (current) {
           clearInterval(this.intervalId);
         } else {
-          this.getobjectBottomLimit();
+          this.getObjectBottomLimit();
           this.animateObject();
         }
       },
@@ -78,26 +92,24 @@ export default {
       }, this.fallingIntervalGap);
     },
 
-    getobjectBottomLimit() {
+    getObjectBottomLimit() {
       const boardBounds = document.querySelector(".teeter-totter__board").getBoundingClientRect();
       const panelBounds = document.querySelector(".the-header").getBoundingClientRect();
       const objectBounds = this.fallingEl.getBoundingClientRect();
-
-      // Similarity of triangles
       const totterCathet = boardBounds.bottom - boardBounds.top - this.settings.boardHeight;
       const similarCathet = (this.fallingObject[0].left * totterCathet) / this.settings.boardWidth;
 
       this.objectBottomLimit =
         this.boardBendingAngle >= 0
-          ? boardBounds.top + similarCathet - objectBounds.height - panelBounds.height
-          : boardBounds.bottom - similarCathet - objectBounds.height - panelBounds.height;
+          ? boardBounds.top + similarCathet - objectBounds.height - panelBounds.height - 20
+          : boardBounds.bottom - similarCathet - objectBounds.height - panelBounds.height - 20;
     },
 
     handleBoardTransitionEnd() {
       if (this.isGamePaused) return;
 
       if (this.isBoardAngleWithinLimits) {
-        this.getobjectBottomLimit();
+        this.getObjectBottomLimit();
       } else {
         this.toggleSimulation();
         this.toggleModal(true);
@@ -117,8 +129,9 @@ export default {
         width: (objectWidth / areaWidth) * 100,
       });
 
-      this.$nextTick(this.getobjectBottomLimit);
+      this.$nextTick(this.getObjectBottomLimit);
     },
   },
 };
 </script>
+
