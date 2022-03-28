@@ -51,7 +51,7 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="(item, index) in language"
+            v-for="(item, index) in languages"
             :key="index"
             @click="changeLanguage(item.symbol)"
           >
@@ -73,7 +73,7 @@ export default {
   components : { RefreshDialog },
   data() {
     return {
-      language: [
+      languages: [
         {
           symbol: 'tr',
           text: 'Türkçe',
@@ -83,6 +83,11 @@ export default {
           symbol: 'en',
           text: 'English',
           url: 'https://countryflagsapi.com/svg/us'
+        },
+        {
+          symbol: 'fr',
+          text: 'Français',
+          url: 'https://countryflagsapi.com/svg/fr'
         }
       ]
     }
