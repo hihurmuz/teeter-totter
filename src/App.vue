@@ -4,7 +4,6 @@
       <TheHeader />
     </v-main>
     <GameArea />
-
   </v-app>
 </template>
 

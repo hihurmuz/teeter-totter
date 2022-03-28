@@ -1,7 +1,7 @@
 <template>
   <main class="game-area">
-    <falling-area></falling-area>
-    <teeter-totter></teeter-totter>
+    <falling-area />
+    <teeter-totter />
   </main>
 </template>
 

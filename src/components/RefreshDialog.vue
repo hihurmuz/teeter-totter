@@ -10,8 +10,7 @@
 
       <v-img src="https://cdn4.iconfinder.com/data/icons/carnival-vol-3/48/116-512.png"></v-img>
 
-
-      <v-divider></v-divider>
+       <v-divider></v-divider>
 
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -21,7 +20,7 @@
           text
           @click="initGame"
         >
-          Refresh The Game
+          {{ $t('refreshTheGame') }}:
         </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>

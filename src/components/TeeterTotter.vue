@@ -1,12 +1,12 @@
 <template>
-  <div class="teeter-totter">
+  <div class="d-flex flex-column align-center">
     <div class="teeter-totter__board" :style="boardStyles">
       <TheObject v-for="theObject in standingObjects" :key="theObject.id" :objectInfo="theObject" on-board />
 
       <TheObject v-for="theObject in isRandomObjects" :key="theObject.id" :objectInfo="theObject" on-board :isRandomCreated="true" />
     </div>
 
-    <div class="teeter-totter__support"></div>
+    <div class="teeter-totter__support" />
   </div>
 </template>
 
