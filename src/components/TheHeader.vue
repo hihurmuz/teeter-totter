@@ -1,6 +1,5 @@
 <template>
-  <header class="the-header">
-
+  <header class="the-header" :class="[this.$vuetify.theme.dark ? 'the-header-dark': 'the-header-light']">
     <div>
       <v-btn class="mr-4" outlined @click="toggleSimulation">
         <v-icon>{{ isGamePaused ? 'mdi-play' : 'mdi-pause' }}</v-icon>
@@ -34,29 +33,34 @@
       </div>
     </div>
 
+    <div>
+      <v-btn text rounded @click="darkMode">
+        <v-icon>{{iconDarkModeType}}</v-icon>
+      </v-btn>
 
-    <v-menu offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon>mdi-translate</v-icon>
-          <v-icon>mdi-chevron-down</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item
-          v-for="(item, index) in language"
-          :key="index"
-          @click="changeLanguage(item.symbol)"
-        >
-          <v-img :src="item.url" width="40" />
-          <v-list-item-title class="ml-2">{{ item.text }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            text
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-translate</v-icon>
+            <v-icon>mdi-chevron-down</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in language"
+            :key="index"
+            @click="changeLanguage(item.symbol)"
+          >
+            <v-img :src="item.url" width="40" />
+            <v-list-item-title class="ml-2">{{ item.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
     <refresh-dialog />
   </header>
 </template>
@@ -95,6 +99,10 @@ export default {
     },
     randomLastObjectWeight(){
       return this.isRandomObjects.length ? this.isRandomObjects.slice(-1)[0].weight : 0
+    },
+
+    iconDarkModeType() {
+      return this.$vuetify.theme.dark ? 'mdi-white-balance-sunny' : 'mdi-weather-night'
     }
   },
   created() {
@@ -115,12 +123,17 @@ export default {
       this.$i18n.locale = lang;
     },
 
+    darkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+    },
+
     handleSpaceClick(event) {
       event.preventDefault();
       if (event.keyCode === 32 && !this.isModalShown) {
         this.toggleSimulation();
       }
     },
+
   },
 };
 </script>

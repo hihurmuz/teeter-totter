@@ -1,6 +1,7 @@
 $totter__board-color: #ff0000;
 $teeter-totter__support-color: #9db1f6;
-$header-color: #efebeb;
+$header-color-light: #efebeb;
+$header-color-dark: #565656;
 $object-size: 2.25rem;
 $object-weight-text: 10px;
 $object-triangle-vertical-size: 1.5rem;
@@ -84,8 +85,15 @@ $teeter-totter__support-border-bottom: 8rem;
   justify-content: space-between;
   flex: 0 0 6rem;
   padding: 0.5rem 1.5rem;
-  background-color: $header-color;
   margin-bottom: 20px
+}
+
+.the-header-light{
+  background-color: $header-color-light;
+}
+
+.the-header-dark{
+  background-color: $header-color-dark;
 }
 
 .the-objects-stats {
